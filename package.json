@@ -1,0 +1,30 @@
+{
+  "name": "openchess",
+  "version": "0.1.0",
+  "description": "openchess",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valmy/openchess.git"
+  },
+  "keywords": [
+    "chess",
+    "blockchain",
+    "nft"
+  ],
+  "author": "T. Budiman <tbudiman@hey.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/valmy/openchess/issues"
+  },
+  "homepage": "https://github.com/valmy/openchess#readme",
+  "dependencies": {
+    "openzeppelin-solidity": "github:OpenZeppelin/openzeppelin-contracts#29ffe6f426730036a664e0ed2f5a114744e56585"
+  }
+}
