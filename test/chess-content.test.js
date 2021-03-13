@@ -101,10 +101,30 @@ contract('ChessContent', accounts => {
   });
 
   it('2nd buyer: success scenario', async () => {
+
+    const ownerStart = await web3.eth.getBalance(owner);
+    const creatorStart = await web3.eth.getBalance(creator);
+    const buyerStart = await web3.eth.getBalance(buyer);
+    const buyer2Start = await web3.eth.getBalance(buyer2);
+
     const result = await openChess.buy(web3.utils.toBN(firstNFT).toString(), {
       from: buyer2,
       value: web3.utils.toWei('2'),
     });
+
+    const ownerEnd = await web3.eth.getBalance(owner);
+    const creatorEnd = await web3.eth.getBalance(creator);
+    const buyerEnd = await web3.eth.getBalance(buyer);
+    const buyer2End = await web3.eth.getBalance(buyer2);
+
+    const ownerDiff = new web3.utils.BN(ownerEnd).sub(new web3.utils.BN(ownerStart));
+    const creatorDiff = new web3.utils.BN(creatorEnd).sub(new web3.utils.BN(creatorStart));
+    const buyerDiff = new web3.utils.BN(buyerEnd).sub(new web3.utils.BN(buyerStart));
+    const buyer2Diff = new web3.utils.BN(buyer2End).sub(new web3.utils.BN(buyer2Start));
+
+    expect(ownerDiff.toString()).to.equal(new web3.utils.BN('1000000000000000').toString());
+    expect(creatorDiff.toString()).to.equal(new web3.utils.BN('5000000000000000').toString());
+    expect(buyerDiff.toString()).to.equal(new web3.utils.BN('1994000000000000000').toString());
   });
 
 });

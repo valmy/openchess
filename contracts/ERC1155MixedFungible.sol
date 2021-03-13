@@ -13,10 +13,10 @@ contract ERC1155MixedFungible is ERC1155 {
 
     // Use a split bit implementation.
     // Store the type in the upper 128 bits..
-    uint256 constant TYPE_MASK = uint256(uint128(0xffffffffffffffff)) << 128;
+    uint256 constant TYPE_MASK = uint256(uint128(0xffffffffffffffffffffffffffffffff)) << 128;
 
     // ..and the non-fungible index in the lower 128
-    uint256 constant NF_INDEX_MASK = uint128(0xffffffffffffffff);
+    uint256 constant NF_INDEX_MASK = uint128(0xffffffffffffffffffffffffffffffff);
 
     // The top bit is a flag to tell if this is a NFI.
     uint256 constant TYPE_NF_BIT = 1 << 255;

@@ -115,9 +115,9 @@ contract ChessContent is Context, Ownable, ERC1155MixedFungibleMintable {
      */
     function buy(uint256 id, address buyer) public payable {
         // must be a copy
-        uint256 index = (id | NF_INDEX_MASK);
+        uint256 index = getNonFungibleIndex(id);
 
-        uint256 nfType = (id | TYPE_MASK);
+        uint256 nfType = getNonFungibleBaseType(id);
 
         require(index != 0, "ChessContent#buy: cannot buy master");
 
@@ -132,10 +132,10 @@ contract ChessContent is Context, Ownable, ERC1155MixedFungibleMintable {
         // price must match
         require(msg.value == cm.price, "ChessContent#buy: price dont match");
 
-        uint256 protocolFee = protocolCommission / 10000 * msg.value;
-        uint256 creatorFee = typeCommissions[nfType] / 10000 * msg.value;
+        uint256 protocolFee = protocolCommission * msg.value / 10000;
+        uint256 creatorFee = typeCommissions[nfType] * msg.value / 10000;
         uint256 payment = msg.value - protocolFee - creatorFee;
-        address creator = nfOwners[nfType];
+        address creator = creators[nfType];
         address nftOwner = nfOwners[id];
         address protocol = owner();
 
